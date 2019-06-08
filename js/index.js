@@ -1,66 +1,59 @@
-const pageContent = {
-    'html': {
-        'head': {
-            'title': 'Income Calculator'
-        },
-        'body': {
-            'padding': '1rem',
-            'panel': {
-                'height': '95%',
-                'width': '95%',
-                'border': '1px solid black',
-                'border-radius': '2rem',
-                'background': 'rgba(250,250,250,.2)',
-                'margin': 'auto',
-                'nav-bar': {
-                    'height': '3rem',
-                    'width': '100%',
-                    'border-radiusTR': '2rem',
-                    'border-radiusTL': '2rem',
-                    'background': 'rgba(60,60,60,1)',
-                }
-            }
-        },
-        'color-cache': {
-            'main-color-bg': 'rgba(47,47,47,1)',
-            'main-color-txt': 'rgba(210,210,210,1)'
-        },
-    },
-    'head': {
-        'color-cache': {
+document.title = pageContent['html']['head']['title'];
 
-        },
-    },
-    'body': {
-        'color-cache': {
+var u_name;
 
-        },
-    },
-    'reset': {
-        'container': {
-            'margin': '0',
-            'padding': '0',
-            'border': '0',
-            'font-size': '100%',
-            'font': 'inherit',
-            'vertical-align': 'baseline',
-            'display': 'block'
-        },
-        'body': {
-            'line-height': '1',
+var USERS = ['Austin']
 
-        }
 
+var CheckUserName = (name)=>{
+    if(USERS.includes(name)){
+        var __day = new Date();
+        alert(`Welcome ${name} How is your ${__day.getDay()}?`)
+
+    }else{
+        alert('You Are not Signed in Please Try Again');
+        __htm.display = 'none';
     }
 }
 
-document.title = pageContent['html']['head']['title'];
+addEventListener('load', (event) => {
+    var psuedo = prompt('Hello Welcome To my Web Development Engine!\nPlease Sign In to continue!', 'username');
+    u_name = psuedo;
+
+    CheckUserName(u_name);
+});
 
 //#region Create>>Find>>Reset
-var appendMultiple = function (_elm, _arr ) {
+var appendMultiple = (_elm, _arr) => {
     for (let i = 0; i < _arr.length; i++) {
         _elm.appendChild(_arr[i]);
     }
+}
+
+var applyStyle = (_elm, _style, _all = false) => {
+    _elm.height = _style['height'];
+    _elm.width = _style['width'];
+    _elm.backgroundColor = _style['background'];
+    __pan.border = __pan_attrs['border'];
+    if (_all) {
+        _elm.borderTopRightRadius = _style['border-radiusTR'];
+        _elm.borderTopLeftRadius = _style['border-radiusTL'];
+        _elm.borderBottomRightRadius = _style['border-radiusBR'];
+        _elm.borderBottomLeftRadius = _style['border-radiusBR'];
+    } else {
+        _elm.borderRadius = __pan_attrs['border-radius'];
+    }
+}
+
+var CreateAnchor = (anch, name) => {
+    anch.textContent = name;
+    anch.href = '#';
+    anch.style.padding = '1rem';
+    anch.style.border = 'rgba(0,0,0,1)';
+    anch.style.margin = '.1rem';
+    anch.style.textDecoration = 'none';
+    anch.style.color = 'rgba(110,110,110,1)';
+    anch.style.background = 'rgba(27,27,27,.8)';
 }
 
 var Reset = function (_elm) {
@@ -75,70 +68,88 @@ var Reset = function (_elm) {
     return;
 }
 
-//html
+//html ---------------------------------------
 const __html = document.documentElement;
 var __htm = __html.style;
 Reset(__htm);
-//head
+__htm.padding = '0 10px';
+//head ---------------------------------------
 const __head = document.head;
 const __h = __head.style;
 Reset(__h);
-//body 
+//body ----------------------------------------
 const __body = document.body;
 var __b = __body.style;
 Reset(__b);
-
 
 //#endregion
 
 //html
 //{
 var __htm_attrs = pageContent['html']['color-cache'];
-__htm.backgroundColor = __htm_attrs['main-color-bg'];
-__htm.color = __htm_attrs['main-color-txt'];
+__htm.backgroundColor = __htm_attrs['bg-color'];
+__htm.color = __htm_attrs['font-color'];
 
-//body
-//{
-__b.padding = pageContent['html']['body']['padding'];
+const __nav_ct = document.createElement('div');
+var __nav = __nav_ct.style;
+__nav.background = 'rgba(47,47,47,1)';
+__nav.width = '95%';
+__nav.height = '3rem';
+__nav.padding = '.3rem 1rem';
+__nav.borderBottom = '1px solid black';
+__nav.borderRight = '1px solid black';
+__nav.borderLeft = '1px solid black';
+__nav.borderBottomRightRadius = '.7rem';
+__nav.borderBottomLeftRadius = '.7rem';
+__nav.display = 'flex';
+__nav.justifyContent = 'flex-end';
 
-//panel
-//{
-const __panel = document.createElement('div');
-var __pan = __panel.style;
-var __pan_attrs = pageContent['html']['body']['panel'];
+
+const __logo_ct = document.createElement('img');
+var _logo = __logo_ct.style;
+__logo_ct.src = './img/logo/lambda.png';
+_logo.order = '1';
+_logo.background = 'rgba(36,36,36,.6)';
+_logo.height = '2rem';
+_logo.width = '2rem';
+_logo.borderRadius = '1rem';
+_logo.padding = '.5rem';
+
+__nav_ct.appendChild(__logo_ct);
+__body.appendChild(__nav_ct);
+
+const nav = document.createElement('nav');
+nav.style.padding = '1rem .2rem';
+__nav_ct.style.justifyContent = 'space-between';
+__nav_ct.appendChild(nav);
+
+const anc_1 = document.createElement('a');
+CreateAnchor(anc_1, 'Sign In')
+const anc_2 = document.createElement('a');
+CreateAnchor(anc_2, 'About Us');
+const anc_3 = document.createElement('a');
+CreateAnchor(anc_3, 'Create a Page');
+
+var anchors = [anc_1, anc_2, anc_3];
+
+for (let i = 0; i < anchors.length; i++) {
+    anchors[i].addEventListener('mouseover', (event) => {
+        anchors[i].style.background = 'red';
+        anchors[i].style.fontWeight = 'bold';
+        anchors[i].style.color = 'rgba(27,27,27,.8)';
+    });
+    anchors[i].addEventListener('mouseout', (event) => {
+        anchors[i].style.background = 'rgba(27,27,27,.8)'
+        anchors[i].style.fontWeight = 'normal';
+        anchors[i].style.color = __htm_attrs['font-color'];
+    });
 
 
-__pan.backgroundColor = __pan_attrs['background'];
-__pan.width = __pan_attrs['width'];
-__pan.height = __pan_attrs['height'];
-__pan.margin = __pan_attrs['margin'];
-__pan.borderRadius = __pan_attrs['border-radius'];
-__pan.border = __pan_attrs['border'];
-//text{
-const __nav_bar = document.createElement('nav')
-var _nb = __nav_bar.style;
-var __nav_attrs = pageContent['html']['body']['panel']['nav-bar'];
-_nb.height = __nav_attrs['height'];
-_nb.width = __nav_attrs['width'];
-_nb.backgroundColor = __nav_attrs['background'];
-_nb.borderTopRightRadius = __nav_attrs['border-radiusTR'];
-_nb.borderTopLeftRadius = __nav_attrs['border-radiusTL'];
-const a1 = document.createElement('a');
-const a2 = document.createElement('a');
-const a3 = document.createElement('a');
+}
 
-a1.textContent = 'Button 1';
-a2.textContent = 'Button 2';
-a3.textContent = 'Button 3';
 
-appendMultiple(__nav_bar, [a1, a2, a3]);
-__panel.appendChild(__nav_bar);
+appendMultiple(nav, anchors)
 
-//}
-
-__body.appendChild(__panel);
-//}
-//}
 //}
 
 console.log(__html);
